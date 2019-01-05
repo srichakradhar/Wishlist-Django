@@ -1,0 +1,2 @@
+{"request":{"method":"POST","url":"/wishes","headers":{"Content-Type":"application/json"},"body":{"id":1,"title":"test wishes 1","wishtext":"Good luck"}},"response":{"status_code":201,"headers":{},"body":{}}}
+{"request":{"method":"GET","url":"/wishes","headers":{},"body":{}},"response":{"status_code":200,"headers":{"Content-Type":"application/json"},"body":[{"id":1,"title":"test wishes 1","wishtext":"Good luck"}]}}
