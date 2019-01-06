@@ -7,9 +7,16 @@ class WishSerializer(serializers.ModelSerializer):
         model = Wish
         fields = ('id','title','wishtext')
 
-class UserSerializer(serializers.Serializer):
+# class UserSerializer(serializers.Serializer):
+#     wishes = serializers.PrimaryKeyRelatedField(many=True, queryset=Wish.objects.all())
+
+#     class Meta:
+#         model = User
+#         fields = ('id', 'username', 'wishes')
+
+class UserSerializer(serializers.HyperlinkedModelSerializer):
     wishes = serializers.PrimaryKeyRelatedField(many=True, queryset=Wish.objects.all())
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'wishes')
+        fields = ('url','id','username','wishes')

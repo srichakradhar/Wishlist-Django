@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-	<testsuite errors="0" failures="1" name="wishes.tests.RestTestCase-20190105152436" skipped="0" tests="1" time="0.068" timestamp="2019-01-05T15:24:36">
-		<testcase classname="wishes.tests.RestTestCase" name="test_get_all_wishes" time="0.068" timestamp="2019-01-05T15:24:36">
-			<failure message="500 != 201" type="AssertionError">
+	<testsuite errors="0" failures="1" name="wishes.tests.RestTestCase-20190106095911" skipped="0" tests="1" time="0.008" timestamp="2019-01-06T09:59:11">
+		<testcase classname="wishes.tests.RestTestCase" name="test_get_all_wishes" time="0.008" timestamp="2019-01-06T09:59:11">
+			<failure message="403 != 201" type="AssertionError">
 <![CDATA[Traceback (most recent call last):
-  File "/home/srichakradhar/Documents/django/Fresco/drf/wishes/tests.py", line 28, in test_get_all_wishes
+  File "/home/sri/Documents/django/drf/wishes/tests.py", line 28, in test_get_all_wishes
     self.assertEqual(res.status_code, row['response']['status_code'])
-AssertionError: 500 != 201
+AssertionError: 403 != 201
 ]]>			</failure>
 		</testcase>
 		<system-out>
-<![CDATA[{'response': {'headers': {}, 'status_code': 201, 'body': {}}, 'request': {'headers': {'Content-Type': 'application/json'}, 'method': 'POST', 'url': '/wishes', 'body': {'title': 'test wishes 1', 'id': 1, 'wishtext': 'Good luck'}}}
+<![CDATA[{'request': {'method': 'POST', 'url': '/wishes', 'headers': {'Content-Type': 'application/json'}, 'body': {'id': 1, 'title': 'test wishes 1', 'wishtext': 'Good luck'}}, 'response': {'status_code': 201, 'headers': {}, 'body': {}}}
 ]]>		</system-out>
 		<system-err>
 <![CDATA[]]>		</system-err>
