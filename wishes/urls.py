@@ -2,6 +2,8 @@ from django.conf.urls import url, include
 from wishes import views
 from rest_framework.urlpatterns import format_suffix_patterns
 from rest_framework.routers import DefaultRouter
+from rest_framework.schemas import get_schema_view, SchemaGenerator
+from rest_framework.documentation import include_docs_urls
 
 urlpatterns = [
     url(r'^$', views.api_root),
@@ -30,3 +32,10 @@ router.register(r'wishes', views.WishViewSet, base_name='wish')
 router.register(r'users', views.UserViewSet, base_name='user')
 
 urlpatterns += router.urls
+
+# generator = SchemaGenerator(title='Wishlist API')
+# schema = generator.get_schema()
+schema_view = get_schema_view(title="Wishlist API")
+
+urlpatterns += [url(r'^schema/$', schema_view),
+url(r'^docs/', include_docs_urls(title='Wishlist API'))]

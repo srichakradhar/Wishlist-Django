@@ -4,6 +4,8 @@ from __future__ import unicode_literals
 from django.test import TestCase
 from rest_framework.test import RequestsClient
 import json
+from requests.auth import HTTPBasicAuth
+from django.contrib.auth.models import User
 
 class RestTestCase(TestCase):
 
@@ -12,9 +14,14 @@ class RestTestCase(TestCase):
         with open('TestData/http001.json') as f:
             for line in f:
                 self.test_1.append(line)
+        self.username = 'frescoadmin'
+        self.password = 'frescopassword'
+        self.user = User.objects.create_user(username=self.username, password=self.password)
 
     def test_get_all_wishes(self):
         client = RequestsClient()
+        client.auth = HTTPBasicAuth(self.username, self.password)
+        client.headers.update({'x-test': 'true'})
         for ro in self.test_1:
             row = json.loads(ro)
             print (row)
@@ -32,3 +39,20 @@ class RestTestCase(TestCase):
             if row['response']['body'] != {}:
                 response = json.loads(res.text)
                 self.assertEqual(response, row['response']['body'])
+
+
+    def test_get_schema(self):
+        client = RequestsClient()
+        client.auth = HTTPBasicAuth(self.username, self.password)
+        client.headers.update({'x-test': 'true'})
+        res = client.get('http://localhost:8000/schema/')
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], "application/coreapi+json")
+
+    def test_get_docs(self):
+        client = RequestsClient()
+        client.auth = HTTPBasicAuth(self.username, self.password)
+        client.headers.update({'x-test': 'true'})
+        res = client.get('http://localhost:8000/docs/')
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers['Content-Type'], "text/html; charset=utf-8")
