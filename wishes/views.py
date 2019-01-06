@@ -14,6 +14,7 @@ from wishes.permissions import IsOwnerOrReadOnly
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
+from rest_framework import viewsets
 
 @api_view(['GET'])
 def api_root(request, format=None):
@@ -22,26 +23,46 @@ def api_root(request, format=None):
         'wishes': reverse('wish-list', request=request, format=format)
     })
 
-class WishList(generics.ListCreateAPIView):
+class WishViewSet(viewsets.ModelViewSet):
+    """
+    This viewset automatically provides `list`, `create`, `retrieve`,
+    `update` and `destroy` actions
+    """
     queryset = Wish.objects.all()
     serializer_class = WishSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+                          IsOwnerOrReadOnly,)
 
     def perform_create(self, serializer):
         serializer.save(owner=self.request.user)
 
-class WishDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Wish.objects.all()
-    serializer_class = WishSerializer
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,
-                      IsOwnerOrReadOnly,)
+# class WishList(generics.ListCreateAPIView):
+#     queryset = Wish.objects.all()
+#     serializer_class = WishSerializer
+#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
 
-class UserList(generics.ListAPIView):
+#     def perform_create(self, serializer):
+#         serializer.save(owner=self.request.user)
 
+# class WishDetail(generics.RetrieveUpdateDestroyAPIView):
+#     queryset = Wish.objects.all()
+#     serializer_class = WishSerializer
+#     permission_classes = (permissions.IsAuthenticatedOrReadOnly,
+#                       IsOwnerOrReadOnly,)
+
+class UserViewSet(viewsets.ReadOnlyModelViewSet):
+    """
+    This viewset automatically provides `list` and `detail` actions.
+    """
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-class UserDetail(generics.RetrieveAPIView):
+# class UserList(generics.ListAPIView):
 
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
+
+# class UserDetail(generics.RetrieveAPIView):
+
+#     queryset = User.objects.all()
+#     serializer_class = UserSerializer
