@@ -26,7 +26,7 @@ urlpatterns += [
 urlpatterns = format_suffix_patterns(urlpatterns)
 
 router = DefaultRouter()
-router.register(r'wishes', views.WishViewSet)
-router.register(r'users', views.UserViewSet)
+router.register(r'wishes', views.WishViewSet, base_name='wish')
+router.register(r'users', views.UserViewSet, base_name='user')
 
 urlpatterns += router.urls

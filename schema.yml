@@ -1,0 +1,112 @@
+info:
+  description: ''
+  title: ''
+  version: ''
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: list
+  /users/:
+    get:
+      description: This viewset automatically provides `list` and `detail` actions.
+      operationId: users_list
+      tags:
+      - users
+  /users/{id}/:
+    get:
+      description: This viewset automatically provides `list` and `detail` actions.
+      operationId: users_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this user.
+          title: !!python/tuple
+          - ID
+          type: integer
+      tags:
+      - users
+  /wishes/:
+    get:
+      description: 'This viewset automatically provides `list`, `create`, `retrieve`,
+
+        `update` and `destroy` actions'
+      operationId: wishes_list
+      tags:
+      - wishes
+    post:
+      description: 'This viewset automatically provides `list`, `create`, `retrieve`,
+
+        `update` and `destroy` actions'
+      operationId: wishes_create
+      tags:
+      - wishes
+  /wishes/{id}/:
+    delete:
+      description: 'This viewset automatically provides `list`, `create`, `retrieve`,
+
+        `update` and `destroy` actions'
+      operationId: wishes_delete
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this wish.
+          title: !!python/tuple
+          - ID
+          type: integer
+      tags:
+      - wishes
+    get:
+      description: 'This viewset automatically provides `list`, `create`, `retrieve`,
+
+        `update` and `destroy` actions'
+      operationId: wishes_read
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this wish.
+          title: !!python/tuple
+          - ID
+          type: integer
+      tags:
+      - wishes
+    patch:
+      description: 'This viewset automatically provides `list`, `create`, `retrieve`,
+
+        `update` and `destroy` actions'
+      operationId: wishes_partial_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this wish.
+          title: !!python/tuple
+          - ID
+          type: integer
+      tags:
+      - wishes
+    put:
+      description: 'This viewset automatically provides `list`, `create`, `retrieve`,
+
+        `update` and `destroy` actions'
+      operationId: wishes_update
+      parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          description: A unique integer value identifying this wish.
+          title: !!python/tuple
+          - ID
+          type: integer
+      tags:
+      - wishes
+servers:
+- url: ''
